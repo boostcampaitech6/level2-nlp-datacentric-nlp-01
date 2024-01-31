@@ -1,0 +1,5 @@
+__pycache__/
+.github/
+output
+data
+py_hanspell
