@@ -24,7 +24,7 @@ def get_text(sid1,sid2,date):
         if t in ['','동영상기사']:
             continue
         array.append([element.text,date])
-        if len(array)==1:
+        if len(array)==2:
             break
     return array
 
@@ -37,11 +37,11 @@ news_tag={105:{731,226,227,230,732,283,229,228},101:{259,258,261,771,260,262,310
 
 
 sdate = date(2019,1,1)
-edate = date(2024, 1,31)
+edate = date(2021,12,31)
 
 list_tag1=list(news_tag.keys())
 list_tag_num=[0,1,2,3,4,6]
-list_date=[(sdate+timedelta(days=x)).strftime('%Y%m%d') for x in range((edate-sdate).days)]
+list_date=[(sdate+timedelta(days=x)).strftime('%Y%m%d') for x in range(0,(edate-sdate).days,7)]
 
 
 for n in range(6):
@@ -49,9 +49,13 @@ for n in range(6):
     tag_num,tag1=list_tag_num[n],list_tag1[n]
     for tag2 in news_tag[tag1]:
         for date in list_date:
-            list_news=list_news+get_text(tag1,tag2,date)
-            list_news=list(set(list_news))
+            try:
+                list_news=list_news+get_text(tag1,tag2,date)
+                list_news=list(set(list_news))
+            except:
+                pass
     output_news=[x[0] for x in list_news]
     output_date=[x[1] for x in list_news]
     art_df=pd.DataFrame({'text':output_news,'date':output_date,'label':[tag_num]*len(output_news)})
     art_df.to_csv(f'augments_{tag_num}.csv')
+
