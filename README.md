@@ -11,14 +11,16 @@
 
 - **Data PreProcessing**
 1)  Dataset 전처리
-- Cleanlab
-- G2P
-- Hand-craft
+   
+    - Cleanlab
+    - G2P
+    - Hand-craft
 
 2)  Input token 전처리
-- 한자변환
-- 의미 없는 토큰 제거
-- 맞춤법 검사
+   
+    - 한자변환
+    - 의미 없는 토큰 제거
+    - 맞춤법 검사
 
 - **Data Augmentation**
     - TTS 증강
